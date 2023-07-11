@@ -2,12 +2,13 @@ package com.example.market.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.json.JSONObject;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
-@RestController
+@Controller
 @RequestMapping("/product")
 public class ProductController {
 
@@ -19,7 +20,11 @@ public class ProductController {
      * @return
      */
     @GetMapping("/detail")
-    public JSONObject getProductDetailPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> paramgeters){
-        return null;
+    public ModelAndView getProductDetailPage(HttpServletRequest request, HttpServletResponse response, @RequestParam Map<String, Object> paramgeters){
+        ModelAndView mv = new ModelAndView("");
+
+
+
+        return mv;
     }
 }
