@@ -14,7 +14,6 @@ public class ProductController {
 
     /**
      * http://localhost:8080/product/detail?productCode=1234
-     * 상품 상세 페이지
      * @param request
      * @param response
      * @param paramgeters
