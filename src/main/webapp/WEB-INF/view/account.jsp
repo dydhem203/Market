@@ -15,11 +15,11 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <a href="index.jsp"><img src="images/logo.png" alt="logo" width="125px"></a>
+                <a href="home.jsp"><img src="images/logo.png" alt="logo" width="125px"></a>
             </div>
             <nav>
                 <ul id="MenuItems">
-                    <li><a href="index.jsp">Home</a></li>
+                    <li><a href="home.jsp">Home</a></li>
                     <li><a href="products.jsp">Products</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Contact</a></li>
