@@ -29,6 +29,7 @@ dependencies {
 	implementation 'org.json:json:20230227'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
+	implementation group: 'org.glassfish.web', name: 'jakarta.servlet.jsp.jstl', version: '2.0.0'
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 }
 
