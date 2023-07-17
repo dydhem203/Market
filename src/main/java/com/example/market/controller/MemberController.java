@@ -16,7 +16,7 @@ import java.io.IOException;
 @RequestMapping("/member")
 public class MemberController {
 
-    public final MemberService memberService;
+    private final MemberService memberService;
 
     @GetMapping("/login")
     public String loginForm() {
@@ -30,9 +30,9 @@ public class MemberController {
     }
 
     @PostMapping("/signup")
-    public String saveSignUpForm(@ModelAttribute Member memberDTO) throws IOException {
+    public String joinSignUpForm(@ModelAttribute Member memberDTO) throws IOException {
 
-        memberService.save(memberDTO);
+        memberService.join(memberDTO);
 
         return "/home";
     }
