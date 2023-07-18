@@ -1,7 +1,6 @@
 package com.example.market.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Data
@@ -10,7 +9,10 @@ public class Cart {
     @Id
     private int no;
     private String userId;
-    private String productCode;
     private int cnt;
     private String cartDate;
+
+    @ManyToOne
+    @JoinColumn(name = "productCode")
+    Product product;
 }

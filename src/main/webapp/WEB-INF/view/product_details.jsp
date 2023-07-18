@@ -2,7 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<html lang="en">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script>
+    function addCart(productCode){
+        var data = JSON.stringify ({"productCode" : productCode, "email" : "" });
+        $.ajax({
+            url : "/cart/addCart",
+            type : "POST",
+            data : data,
+            contentType : 'application/json',
+            success : function(){
+
+            },
+            error : function(e){
+                console.log(e);
+            }
+        });
+    }
+
+</script>
 
 <head>
     <meta charset="UTF-8">
@@ -30,18 +48,18 @@
 <div class="container">
     <div class="navbar">
         <div class="logo">
-            <a href="home.jsp"><img src="/images/logo.png" alt="logo" width="125px"></a>
+            <a href="/main"><img src="/images/logo.png" alt="logo" width="125px"></a>
         </div>
         <nav>
             <ul id="MenuItems">
-                <li><a href="home.jsp">Home</a></li>
+                <li><a href="/main">Home</a></li>
                 <li><a href="products.jsp">Products</a></li>
                 <li><a href="">About</a></li>
                 <li><a href="">Contact</a></li>
                 <li><a href="account.jsp">Account</a></li>
             </ul>
         </nav>
-        <a href="cart.jsp"><img src="/images/cart.png" width="30px" height="30px"></a>
+        <a href="/cart/main"><img src="/images/cart.png" width="30px" height="30px"></a>
         <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>
@@ -94,9 +112,10 @@
                     <td>${product.expDate}</td>
                 </tr>
             </table>
-
-            <input type="number" value="1">
-            <a href="" class="btn">Add To Cart</a>
+            <div id="addToCart">
+                <input type="number" value="1">
+                <a href="javascript:addCart(${product.productCode});" class="btn">Add To Cart</a>
+            </div>
 
             <h3>Product Details <i class="fa fa-indent"></i></h3>
             <br>
@@ -181,26 +200,6 @@
             MenuItems.style.maxHeight = "0px"
         }
     }
-</script>
-
-<!-- product gallery -->
-<script>
-    var ProductImg = document.getElementById("ProductImg");
-    var SmallImg = document.getElementsByClassName("small-img");
-
-    SmallImg[0].onclick = function () {
-        ProductImg.src = SmallImg[0].src;
-    }
-    SmallImg[1].onclick = function () {
-        ProductImg.src = SmallImg[1].src;
-    }
-    SmallImg[2].onclick = function () {
-        ProductImg.src = SmallImg[2].src;
-    }
-    SmallImg[3].onclick = function () {
-        ProductImg.src = SmallImg[3].src;
-    }
-
 </script>
 </body>
 

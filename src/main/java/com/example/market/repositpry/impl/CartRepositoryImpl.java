@@ -14,7 +14,7 @@ public class CartRepositoryImpl implements CartRepository {
         this.em = em;
     }
 
-    public List<Cart> getCartDataByUserId(String userId){
+    public List<Cart> getCartDatasByUserId(String userId){
         return em.createQuery("select c from Cart c where c.userId = :userId", Cart.class).setParameter("userId", userId).getResultList();
     }
     public int addUserCartData(List<Cart> carts){
