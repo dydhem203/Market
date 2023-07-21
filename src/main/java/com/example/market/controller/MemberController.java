@@ -1,6 +1,7 @@
 package com.example.market.controller;
 
-import com.example.market.dto.Member;
+import com.example.market.dto.MemberDTO;
+import com.example.market.entity.MemberEntity;
 import com.example.market.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -16,7 +17,7 @@ import java.io.IOException;
 @RequestMapping("/member")
 public class MemberController {
 
-    public final MemberService memberService;
+    private final MemberService memberService;
 
     @GetMapping("/login")
     public String loginForm() {
@@ -24,17 +25,16 @@ public class MemberController {
         return "/member/loginForm";
     }
 
-    @GetMapping("/signup")
+    @GetMapping("/join")
     public String signupForm() {
-        return "/member/signupForm";
+        return "/member/joinForm";
     }
 
-    @PostMapping("/signup")
-    public String saveSignUpForm(@ModelAttribute Member memberDTO) throws IOException {
+    @PostMapping("/join")
+    public String joinSignUpForm(@ModelAttribute MemberDTO memberDTO) throws IOException {
 
-        memberService.save(memberDTO);
-
-        return "/home";
+        memberService.join(memberDTO);
+        return "home";
     }
 
 

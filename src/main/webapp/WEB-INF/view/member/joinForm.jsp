@@ -46,12 +46,17 @@
                     </div>
                     <hr id="Indicator" class="center-hr">
 
-                    <form id="RegForm">
+                    <form id="RegForm" method="post">
                         <%--아이디(중복확인), 비밀번호, 비밀번호 확인, 이름, 이메일(중복확인), 휴대폰(인증번호받기), 성별-라디오버튼, 생년월일(숫자만) --%>
-                        <input type="text" placeholder="Username">
-                        <input type="email" placeholder="Email">
+                        <input type="text" name="id" placeholder="Username">
                         <input type="password" placeholder="Password">
-                        <button type="submit" class="btn">Register</button>
+                        <input type="text" placeholder="Email">
+                        <input type="radio" name="gender" value="f">
+                            <input type="radio" name="gender" value="f">
+                        <input type="text" name="addr1" placeholder="Password">
+                        <input type="text" name="addr2" placeholder="Password">
+
+                        <button type="submit" class="btn">가입하기</button>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,8 @@
 package com.example.market.service;
 
-import com.example.market.dto.Member;
+import com.example.market.dto.MemberDTO;
+import com.example.market.entity.MemberEntity;
 
 public interface MemberService {
-    void save(Member memberDTO);
+    void join(MemberDTO memberDTO);
 }

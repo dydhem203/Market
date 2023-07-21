@@ -18,7 +18,7 @@
 <div class="top-nav" style="padding:10px">
     <nav>
         <ul>
-            <li style="font-size: 12px; color: #4b0082"><a href="/member/signup">회원가입</a></li>
+            <li style="font-size: 12px; color: #4b0082"><a href="/member/join">회원가입</a></li>
             <li  style="font-size: 12px"><a href="/member/login">로그인</a></li>
         </ul>
     </nav>
