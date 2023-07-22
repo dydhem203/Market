@@ -25,6 +25,7 @@ public class Product {
     private String allergy;
     private String expDate;
     private String details;
+    private int scope;
 
     @OneToMany
     @JoinColumn(name = "productCode")

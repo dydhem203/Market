@@ -7,10 +7,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/product")
 public class ProductController {
+
     @Autowired
     ProductService productService;
+
+    @GetMapping("/")
+    public String getMainPage(Model model) {
+
+        model.addAttribute("products", productService.getProducts());
+
+        return "home";
+    }
+
+
 
     /**
      * http://localhost:8080/product/detail/1000001654
@@ -18,7 +28,7 @@ public class ProductController {
      * @param productCode
      * @return
      */
-    @GetMapping("/detail/{productCode}")
+    @GetMapping("/product/detail/{productCode}")
     public String getProductDetailPage(Model model, @PathVariable ("productCode") String productCode){
         model.addAttribute("product", productService.getProductDataByProductCode(productCode));
         return "product_details";

@@ -20,4 +20,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product getProductDataByProductCode(String productCode){
         return em.find(Product.class, productCode);
     }
+
+    @Override
+    public List<Product> getProducts() {
+        return em.createQuery("select p from Product p order by scope desc limit 8", Product.class).getResultList();
+    }
+
 }
