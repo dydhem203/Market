@@ -132,8 +132,8 @@
 </div>
 <!-- Product detail -->
 <div class="small-container">
-    <c:forEach begin="0" end="${fn:length(product.productImages)}" var="i">
-        <c:forEach var="image" items="${product.productImages}">
+    <c:forEach begin="0" end="${fn:length(product.productImageList)}" var="i">
+        <c:forEach var="image" items="${product.productImageList}">
             <c:if test="${image.imgOrder eq i}">
                 <div class="col-4"><img src="${image.image}"></div>
             </c:if>

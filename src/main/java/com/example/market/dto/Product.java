@@ -1,14 +1,11 @@
 package com.example.market.dto;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
+
 @Data
-@Entity
 public class Product {
-    @Id
     private String productCode;
     private String productName;
     private String price;
@@ -26,8 +23,5 @@ public class Product {
     private String expDate;
     private String details;
     private int scope;
-
-    @OneToMany
-    @JoinColumn(name = "productCode")
-    private List<ProductImage> productImages = new ArrayList<>();
+    private List<ProductImage> productImageList;
 }

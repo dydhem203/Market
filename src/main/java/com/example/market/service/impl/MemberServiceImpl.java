@@ -13,33 +13,33 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberRepository memberRepository;
 
     public void join(MemberDTO memberDTO) {
 
         MemberEntity memberEntity = MemberEntity.toSaveEntity(memberDTO);
-        memberRepository.save(memberEntity);
+//        memberRepository.save(memberEntity);
     }
     
     public MemberDTO update(MemberDTO memberDTO) {
         
         MemberEntity memberEntity = MemberEntity.toUpdateEntity(memberDTO);
-        memberRepository.save(memberEntity);
+//        memberRepository.save(memberEntity);
         
         return findById(memberDTO.getNo());
     }
 
     private MemberDTO findById(int no) {
 
-        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByNo(no);
-
-        if (optionalMemberEntity.isPresent()) {
-
-            MemberEntity memberEntity = optionalMemberEntity.get();
-            return MemberDTO.toMemberDTO(memberEntity);
-        } else {
-            return null;
-        }
+//        Optional<MemberEntity> optionalMemberEntity = memberRepository.findByNo(no);
+//
+//        if (optionalMemberEntity.isPresent()) {
+//
+//            MemberEntity memberEntity = optionalMemberEntity.get();
+//            return MemberDTO.toMemberDTO(memberEntity);
+//        } else {
+//            return null;
+//        }
+        return null;
     }
 
 }

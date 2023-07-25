@@ -1,47 +1,29 @@
 package com.example.market.entity;
 
-import com.example.market.dto.Cart;
 import com.example.market.dto.MemberDTO;
-import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
-@Entity
-@Table(name="user")
 public class MemberEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)     // mysql - auto_increment
     private int no;
 
-    @Column(length = 45, nullable = false)
     private String userId;
 
-    @Column(length = 100, nullable = false)
     private String pw;
 
-    @Column(length = 45, nullable = false)
     private String name;
 
-    @Column(length = 100, nullable = false)
     private String email;
 
-    @Column(length = 1)
     private String gender;
 
-    @Column(length = 20, nullable = false)
     private String hp;
 
-    @Column(length = 100, nullable = false)
     private String addr1;
 
-    @Column(length = 100, nullable = false)
     private String addr2;
 
-    @Column(length = 10)
     private String birthday;
 
     public static MemberEntity toSaveEntity(MemberDTO memberDTO) {

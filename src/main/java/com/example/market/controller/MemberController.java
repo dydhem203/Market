@@ -1,7 +1,6 @@
 package com.example.market.controller;
 
 import com.example.market.dto.MemberDTO;
-import com.example.market.entity.MemberEntity;
 import com.example.market.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
