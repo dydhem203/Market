@@ -1,7 +1,7 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -28,22 +28,8 @@
 
 <div class="header">
     <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <a href="/"><img src="/images/logo.png" alt="logo" width="125px"></a>
-            </div>
-            <nav>
-                <ul id="MenuItems">
-                    <li><a href="home">Home</a></li>
-                    <li><a href="products.jsp">Products</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="account.jsp">회원가입</a></li>
-                </ul>
-            </nav>
-            <a href="cart.jsp"><img src="images/cart.png" width="30px" height="30px"></a>
-            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
-        </div>
+        <!-- Navbar -->
+        <jsp:include page="navbar.jsp"></jsp:include>
         <div class="row">
             <div class="col-2">
                 <h1>Give Your Workout <br> A New Style!</h1>
@@ -299,60 +285,7 @@
 </div>
 
 <!-- Footer -->
-<div class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="footer-col-1">
-                <h3>Download Our App</h3>
-                <p>Download App for Android and ios mobile phone.</p>
-                <div class="app-logo">
-                    <img src="images/play-store.png">
-                    <img src="images/app-store.png">
-                </div>
-            </div>
-            <div class="footer-col-2">
-                <img src="images/logo-white.png">
-                <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
-                </p>
-            </div>
-            <div class="footer-col-3">
-                <h3>Useful Links</h3>
-                <ul>
-                    <li>Coupons</li>
-                    <li>Blog Post</li>
-                    <li>Return Policy</li>
-                    <li>Join Affiliate</li>
-                </ul>
-            </div>
-            <div class="footer-col-4">
-                <h3>Follow Us</h3>
-                <ul>
-                    <li>Facebook</li>
-                    <li>Twitter</li>
-                    <li>Instagram</li>
-                    <li>Youtube</li>
-                </ul>
-            </div>
-        </div>
-        <hr>
-        <p class="copyright">Copyright 2020 - Samwit Adhikary</p>
-    </div>
-</div>
-
-<!-- javascript -->
-
-<script>
-    var MenuItems = document.getElementById("MenuItems");
-    MenuItems.style.maxHeight = "0px";
-    function menutoggle() {
-        if (MenuItems.style.maxHeight == "0px") {
-            MenuItems.style.maxHeight = "200px"
-        }
-        else {
-            MenuItems.style.maxHeight = "0px"
-        }
-    }
-</script>
+<jsp:include page="footer.jsp"></jsp:include>
 
 </body>
 

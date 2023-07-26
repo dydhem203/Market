@@ -8,4 +8,8 @@ public class Cart {
     private String userId;
     private int cnt;
     private String cartDate;
+    private String productCode;
+    private String productName;
+    private String dcPrice;
+    private String image;
 }

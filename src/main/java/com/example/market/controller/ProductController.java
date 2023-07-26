@@ -23,7 +23,7 @@ public class ProductController {
 
 
     /**
-     * http://localhost:8080/product/detail/1000001654
+     * http://localhost:8080/product/detail/1
      * @param model
      * @param productCode
      * @return
