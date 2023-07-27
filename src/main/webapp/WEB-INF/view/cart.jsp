@@ -4,13 +4,33 @@
 <!DOCTYPE html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-    function goProductDetail2(productCode){
-        $.get("/product/detail/" + productCode);
-    }
-    function goProductDetail(productCode){
-        $.get("/product/detail/" + productCode, function (data, status) {
-            console.log(`${status}`);
-        });
+    function removeCart(productCode){
+        // var data = JSON.stringify ({"productCode" : productCode});
+        // $.ajax({
+        //     url : "/cart/removeCart",
+        //     type : "POST",
+        //     data : data,
+        //     contentType : 'application/json',
+        //     success : function(){
+        //     },
+        //     error : function(e){
+        //         console.log(e);
+        //     }
+        // });
+
+        let f = document.createElement('form');
+        let obj;
+        obj = document.createElement('input');
+        obj.setAttribute('type', 'hidden');
+        obj.setAttribute('name', 'productCode');
+        obj.setAttribute('value', productCode);
+
+        f.appendChild(obj);
+        f.setAttribute('method', 'post');
+        f.setAttribute('Content-Type', 'application/json');
+        f.setAttribute('action', '/cart/removeCart');
+        document.body.appendChild(f);
+        f.submit();
     }
 </script>
 <html lang="en">
@@ -18,7 +38,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Products | RedStore</title>
+    <title>Market</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
@@ -43,30 +63,22 @@
                     <td>
                         <div class="cart-info">
                             <img src="${cart.image}" style=" cursor: pointer;" onclick="location.href='/product/detail/${cart.productCode}';">
-                            <div style=" cursor: pointer;" onclick="location.href='/product/detail/${cart.productCode}';">
-                                <p>${cart.productName}</p>
+                            <div>
+                                <p style=" cursor: pointer;" onclick="location.href='/product/detail/${cart.productCode}';">${cart.productName}</p>
                                 <small>Price: ${cart.dcPrice}</small>
                                 <br>
-                                <a href="">Remove</a>
+                                <a href="javascript:removeCart(${cart.productCode});">Remove</a>
                             </div>
                         </div>
                     </td>
                     <td><input type="number" value="${cart.cnt}"></td>
-                    <td>${cart.dcPrice}</td>
-                    <c:set var="total" value="${total + cart.dcPrice}" />
+                    <td>${cart.dcPrice * cart.cnt}</td>
+                    <c:set var="total" value="${total + cart.dcPrice * cart.cnt}" />
                 </tr>
             </c:forEach>
         </table>
         <div class="total-price">
             <table>
-                <tr>
-                    <td>Subtotal</td>
-                    <td>$200.00</td>
-                </tr>
-                <tr>
-                    <td>Tax</td>
-                    <td>$35.00</td>
-                </tr>
                 <tr>
                     <td>Total</td>
                     <td><c:out value="${total}원"></c:out></td>

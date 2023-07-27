@@ -9,4 +9,5 @@ import java.util.Map;
 public interface CartService {
     List<Cart> getCartDatasByUserId(String userId);
     int addCart(HttpServletRequest request, Map<String, Object> paramgeters);
+    int removeCart(HttpServletRequest request, Map<String, Object> paramgeters);
 }

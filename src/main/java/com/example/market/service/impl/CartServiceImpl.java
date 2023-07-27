@@ -27,18 +27,16 @@ public class CartServiceImpl implements CartService {
     @Override
     public int addCart(HttpServletRequest request, Map<String, Object> paramgeters){
         String userId = "jyjang";
-        // 사용자의 기존 장바구니 정보 조회
-        List<Cart> carts1 = cartMapper.getCartDatasByUserId(userId);
-        // 추가할 장바구니 정보
-        List<Map<String, Object>> carts2 = (List<Map<String, Object>>) paramgeters.get(CommonConstatns.cartItems);
-        for (Map<String, Object> cart2:carts2) {
-            String productCode = String.valueOf(cart2.get(CommonConstatns.productCode));
-            for (Cart cart1: carts1) {
-                if(productCode.equals(cart1.getProductCode())){
-                }
-            }
-        }
+        List<Map<String, Object>> carts = (List<Map<String, Object>>) paramgeters.get(CommonConstatns.cartItems);
         // 장바구니 추가
-        return cartMapper.addUserCartData(carts1);
+        return cartMapper.addUserCartData(carts, userId);
+    }
+
+    @Override
+    public int removeCart(HttpServletRequest request, Map<String, Object> paramgeters){
+        String userId = "jyjang";
+        String productCode = String.valueOf(paramgeters.get(CommonConstatns.productCode));
+        // 장바구니 추가
+        return cartMapper.removeUserCartData(productCode, userId);
     }
 }

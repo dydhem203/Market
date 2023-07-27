@@ -41,4 +41,11 @@ public class CartController {
         cartService.addCart(request, params);
     }
 
+    @PostMapping("/removeCart")
+    public String removeCart(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String, Object> params, Model model) {
+        cartService.removeCart(request, params);
+        String userId = "jyjang";
+        model.addAttribute("carts", cartService.getCartDatasByUserId(userId));
+        return "cart";
+    }
 }

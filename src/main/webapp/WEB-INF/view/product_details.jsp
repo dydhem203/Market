@@ -12,7 +12,7 @@
             data : data,
             contentType : 'application/json',
             success : function(){
-
+                alert("장바구니 등록이 완료되었습니다.");
             },
             error : function(e){
                 console.log(e);
@@ -24,7 +24,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>상품 상세 | Market</title>
+    <title>Market</title>
     <link rel="stylesheet" href="/css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
