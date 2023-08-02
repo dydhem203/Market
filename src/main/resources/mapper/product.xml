@@ -12,4 +12,12 @@
         from productImage
         where productCode = #{productCode}
     </select>
+    <select id="getProducts" resultType="Product">
+        select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
+        from product
+    </select>
+    <select id="getPopularProducts" resultType="Product">
+        select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
+        from product limit 8
+    </select>
 </mapper>

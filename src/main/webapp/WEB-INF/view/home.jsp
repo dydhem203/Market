@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 
@@ -14,17 +15,6 @@
 </head>
 
 <body>
-
-<%-- 맨 위 --%>
-<div class="top-nav" style="padding:10px">
-    <nav>
-        <ul>
-            <li style="font-size: 12px; color: #4b0082"><a href="/member/join">회원가입</a></li>
-            <li  style="font-size: 12px"><a href="/member/login">로그인</a></li>
-        </ul>
-    </nav>
-</div>
-
 
 <div class="header">
     <div class="container">
@@ -71,10 +61,14 @@
 
 <%--    </c:forEach>--%>
     <ul class="row">
-        <c:forEach var="item" items="${products}">
+        <c:forEach var="item" items="${popularProducts}">
             <li class="col-4">
                 <a href="/product/detail/${item.productCode}"><img src="${item.image}"></a>
-                <h4>${item.productName}</h4>
+                <h5>${item.productName}</h5>
+                <div class="opt-price">
+                    <em class="market-price"><fmt:formatNumber value="${item.price}" pattern="#,###"/></em>
+                    <span class="market_tx">원</span>
+                </div>
                 <div class="rating">
                     <c:forEach begin="1" end="${item.scope}">
                         <i class="fa fa-star"></i>
@@ -83,7 +77,6 @@
                         <i class="fa fa-star-o"></i>
                     </c:forEach>
                 </div>
-                <p>${item.price}</p>
             </li>
         </c:forEach>
     </ul>
@@ -122,7 +115,7 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>용
                 <i class="fa fa-star-o"></i>
             </div>
             <p>$50.00</p>

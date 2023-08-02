@@ -134,6 +134,32 @@ h4{
     color: #555;
     font-weight: normal;
 }
+
+h5{
+    color: #555;
+    font-weight: normal;
+}
+
+.market-price {
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: #222;
+    font-family: "Spoqa-Medium", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", Arial, sans-serif;
+    vertical-align: middle;
+}
+
+em{
+    font-style: normal;
+    font-weight: bold;
+}
+
+.market_tx{
+    font-size: 11px;
+    color: #222;
+    vertical-align: sub;
+    display: inline-block;
+}
+
 .col-4 p{
     font-size: 14px;
 }

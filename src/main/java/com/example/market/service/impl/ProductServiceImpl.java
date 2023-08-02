@@ -23,4 +23,9 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getProducts() {
         return productMapper.getProducts();
     }
+
+    @Override
+    public List<Product> getPopularProducts() {
+        return productMapper.getPopularProducts();
+    }
 }

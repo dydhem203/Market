@@ -15,22 +15,30 @@ public class ProductController {
     @GetMapping("/")
     public String getMainPage(Model model) {
 
-        model.addAttribute("products", productService.getProducts());
+        model.addAttribute("popularProducts", productService.getPopularProducts());
 
         return "home";
     }
 
 
-
     /**
      * http://localhost:8080/product/detail/1
+     *
      * @param model
      * @param productCode
      * @return
      */
     @GetMapping("/product/detail/{productCode}")
-    public String getProductDetailPage(Model model, @PathVariable ("productCode") String productCode){
+    public String getProductDetailPage(Model model, @PathVariable("productCode") String productCode) {
         model.addAttribute("product", productService.getProductDataByProductCode(productCode));
         return "product_details";
+    }
+
+    @GetMapping("/products")
+    public String getProduct(Model model) {
+
+        model.addAttribute("products", productService.getProducts());
+
+        return "products";
     }
 }

@@ -7,7 +7,7 @@
         <nav>
             <ul id="MenuItems">
                 <li><a href="/">Market</a></li>
-                <li><a href="products.jsp">상품</a></li>
+                <li><a href="/products">상품</a></li>
                 <li><a href="/member/login">계정</a></li>
             </ul>
         </nav>
