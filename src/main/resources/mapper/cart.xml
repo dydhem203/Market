@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.market.mapper.CartMapper">
+    <select id="getCartDatasByUserId" resultType="Cart">
+        select c.no, c.userId, c.cnt, c.productCode, p.productName, p.dcPrice, p.image
+        from cart c inner join product p on c.productCode = p.productCode
+        where c.userId = #{userId}
+    </select>
+
+    <insert id="addUserCartData">
+        INSERT INTO cart (userId, productCode, cartdate, cnt)
+        VALUES
+        <foreach collection="carts" item="cart" index="index" separator=",">
+            (#{userId}, #{cart.productCode}, now(), #{cart.cnt})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+            cartdate=now(),
+            cnt=VALUES(cart.cnt)+cnt
+    </insert>
+
+    <delete id="removeUserCartData">
+        DELETE FROM cart WHERE userId = #{userId} AND productCode = #{productCode}
+    </delete>
+</mapper>
