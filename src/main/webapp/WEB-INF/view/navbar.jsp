@@ -7,7 +7,7 @@
         <nav>
             <ul id="MenuItems">
                 <li><a href="/">Market</a></li>
-                <li><a href="/products">상품</a></li>
+                <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>
                 <li><a href="/member/login">계정</a></li>
             </ul>
         </nav>
@@ -27,4 +27,11 @@
             MenuItems.style.maxHeight = "0px"
         }
     }
+
+    const showProducts = () => {
+        console.log("목록 요청");
+        const page = 1
+        location.href = "/products/paging?page="+page;
+    }
+
 </script>

@@ -28,4 +28,11 @@ public class ProductServiceImpl implements ProductService {
     public List<Product> getPopularProducts() {
         return productMapper.getPopularProducts();
     }
+
+    @Override
+    public int getProductsCnt() {
+
+        // 범위를 설정해서 가져와야한당!!
+        return productMapper.getProductsCnt();
+    }
 }

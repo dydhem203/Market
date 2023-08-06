@@ -13,4 +13,6 @@ public interface ProductMapper {
     List<Product> getProducts();
 
     List<Product> getPopularProducts();
+
+    int getProductsCnt();
 }

@@ -20,4 +20,8 @@
         select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
         from product limit 8
     </select>
+    <select id="getProductsCnt" resultType="_int">
+        select count(productCode) as totalProducts
+        from product
+    </select>
 </mapper>
