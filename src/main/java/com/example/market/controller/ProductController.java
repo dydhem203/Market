@@ -38,8 +38,9 @@ public class ProductController {
     @GetMapping("/products/paging")
     public String getProducts(Model model, @RequestParam(value = "page")int currentPage) {
 
-        int totalProducts = productService.getProductsCnt();    // 총 상품 개수
-        int productsPerPage = 20;       // 한 페이지당 표시할 상품의 개수
+        // System.out.println("ProductsController - ");
+        int totalProducts = productService.getAllProductsCnt();    // 총 상품 개수
+        int productsPerPage = 12;       // 한 페이지당 표시할 상품의 개수
         int totalPages = ((totalProducts-1) / productsPerPage) + 1;             // 총 페이지 개수
         int displayPageNum = 10;         // 한 번에 표시할 페이지의 개수
         int startPage = ((currentPage-1) / displayPageNum) * displayPageNum + 1;              // 시작 페이지 번호
@@ -47,9 +48,9 @@ public class ProductController {
         int endPage = (((currentPage-1)/displayPageNum)+1) * displayPageNum;                // 끝 페이지 번호
         if (totalPages < endPage) endPage = totalPages;
         boolean nextTF = endPage != totalPages;         // 다음으로 가는 화살표 표시 여부
+        int startIdx = ((currentPage-1) * productsPerPage)+1;
 
-
-        model.addAttribute("products", productService.getProducts());
+        model.addAttribute("products", productService.getProducts(startIdx, productsPerPage));
         model.addAttribute("prevTF", prevTF);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);

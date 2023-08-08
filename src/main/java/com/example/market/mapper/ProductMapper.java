@@ -10,9 +10,9 @@ import java.util.List;
 public interface ProductMapper {
     Product getProductDataByProductCode(String productCode);
     List<ProductImage> getProductImagesByProductCode(String productCode);
-    List<Product> getProducts();
+    List<Product> getProducts(int startIdx, int productsPerPage);
 
     List<Product> getPopularProducts();
 
-    int getProductsCnt();
+    int getAllProductsCnt();
 }

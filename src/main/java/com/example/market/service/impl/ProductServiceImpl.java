@@ -20,9 +20,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts() {
-        return productMapper.getProducts();
+    public List<Product> getProducts(int startIdx, int productsPerPage) {
+
+        return productMapper.getProducts(startIdx, productsPerPage);
     }
+
 
     @Override
     public List<Product> getPopularProducts() {
@@ -30,9 +32,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int getProductsCnt() {
-
-        // 범위를 설정해서 가져와야한당!!
-        return productMapper.getProductsCnt();
+    public int getAllProductsCnt() {
+        return productMapper.getAllProductsCnt();
     }
 }

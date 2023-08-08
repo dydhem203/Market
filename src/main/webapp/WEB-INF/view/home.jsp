@@ -57,9 +57,6 @@
 
 <div class="small-container">
     <h2 class="title">지금 인기있는 상품이에요.</h2>
-<%--    <c:forEach var="item" items="${products}">--%>
-
-<%--    </c:forEach>--%>
     <ul class="row">
         <c:forEach var="item" items="${popularProducts}">
             <li class="col-4">
@@ -115,7 +112,7 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>용
+                <i class="fa fa-star"></i>
                 <i class="fa fa-star-o"></i>
             </div>
             <p>$50.00</p>

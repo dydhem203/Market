@@ -301,6 +301,8 @@ select:focus{
 }
 .page-btn{
     margin: 0 auto 80px;
+    display: table;     /* 자식을 가운데 정렬할 때 부모에서 display: table 사용하기. */
+
 }
 .page-btn span{
     display: inline-block;
@@ -311,6 +313,7 @@ select:focus{
     text-align: center;
     line-height: 40px;
     cursor: pointer;
+    vertical-align: middle;     /* 자식을 가운데 정렬할 때 자식에서 vertical-align: middle; */
 }
 .page-btn span:hover{
     background: #ff523b;

@@ -13,14 +13,19 @@
         where productCode = #{productCode}
     </select>
     <select id="getProducts" resultType="Product">
-        select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
-        from product
+        select P.productCode, P.productName, P.price, P.dcPrice, P.image, P.regCnt, P.remCnt, P.dcRate, P.brand, P.amt, P.scope
+        from (
+                 select @rownum:=@rownum+1 rnum, P.*
+                 from product P,
+                     (select @rownum := 0) R
+                 where 1 = 1) P
+        where rnum between #{startIdx} and #{startIdx} + #{productsPerPage} - 1
     </select>
     <select id="getPopularProducts" resultType="Product">
         select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
         from product limit 8
     </select>
-    <select id="getProductsCnt" resultType="_int">
+    <select id="getAllProductsCnt" resultType="_int">
         select count(productCode) as totalProducts
         from product
     </select>

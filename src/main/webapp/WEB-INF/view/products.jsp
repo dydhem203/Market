@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
-<html lang="en">
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -53,17 +53,33 @@
             </c:forEach>
         </ul>
         <div class="page-btn">
-            <span>1</span>
-            <span>2</span>
-            <span>3</span>
-            <span>4</span>
-            <span>&#8594;</span>
+            <c:if test="${prevTF eq true}">
+                <span id="prevShow" >←</span>
+            </c:if>
+            <c:forEach var="p" begin="${startPage}" end="${endPage}">
+                <span onclick="loadProducts(${p})">${p}</span>
+            </c:forEach>
+
+<%--            <span onclick="loadProducts(${2})">2</span>--%>
+<%--            <span>3</span>--%>
+<%--            <span>4</span>--%>
+            <c:if test="${nextTF eq true}">
+                <span id="nextShow">→</span>
+            </c:if>
+
         </div>
     </div>
 
     <!-- Footer -->
     <jsp:include page="footer.jsp"></jsp:include>
 
+    <script>
+        const loadProducts = (page) => {
+            console.log("목록 요청");
+            location.href = "/products/paging?page="+page;
+        }
+
+    </script>
 </body>
 
 </html>

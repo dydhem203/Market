@@ -7,9 +7,9 @@ import java.util.List;
 public interface ProductService {
     Product getProductDataByProductCode(String productCode);
 
-    List<Product> getProducts();
+    List<Product> getProducts(int startIdx, int productsPerPage);
 
     List<Product> getPopularProducts();
 
-    int getProductsCnt();
+    int getAllProductsCnt();
 }
