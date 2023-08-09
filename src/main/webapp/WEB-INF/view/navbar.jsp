@@ -8,7 +8,7 @@
             <ul id="MenuItems">
                 <li><a href="/">Market</a></li>
                 <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>
-                <li><a href="/member/login">계정</a></li>
+                <li><a href="/user/loginPage">계정</a></li>
             </ul>
         </nav>
         <a href="/cart/main"><img src="/images/cart.png" width="30px" height="30px"></a>
