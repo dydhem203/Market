@@ -7,6 +7,7 @@
         <nav>
             <ul id="MenuItems">
                 <li><a href="/">Market</a></li>
+<%--                <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>--%>
                 <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>
                 <li><a href="/user/loginPage">계정</a></li>
             </ul>
@@ -28,10 +29,11 @@
         }
     }
 
-    const showProducts = () => {
-        console.log("목록 요청");
-        const page = 1
-        location.href = "/products/paging?page="+page;
+    function showProducts() {
+        let f = document.createElement('form');
+        f.setAttribute('method', 'post');
+        f.setAttribute('action', 'product');
+        document.body.appendChild(f);
+        f.submit();
     }
-
 </script>

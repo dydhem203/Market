@@ -12,6 +12,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $("#prd_sort").change(function (){
+               loadProducts(1);
+           });
+        });
+    </script>
 </head>
 
 <body>
@@ -24,12 +32,12 @@
     <div class="small-container">
         <div class="row row-2">
             <h2>All Products</h2>
-            <select>
-                <option>Default Sort</option>
-                <option>Sort By Price</option>
-                <option>Sort By Popularity</option>
-                <option>Sort By Rating</option>
-                <option>Sort By Sale</option>
+            <select class="prd_sort" id="prd_sort">
+                <option selected="selected" value="productCode">추천순</option>
+                <option value="price">낮은 가격순</option>
+                <option value="priced">높은 가격순</option>
+                <option value="dcrate">할인율순</option>
+<%--                <option value="cnt">리뷰많은순</option>--%>
             </select>
         </div>
         <ul class="row">
@@ -75,8 +83,49 @@
 
     <script>
         const loadProducts = (page) => {
-            console.log("목록 요청");
-            location.href = "/products/paging?page="+page;
+
+            let f = document.createElement('form');
+
+            let objSearchText = document.createElement('input');
+            objSearchText.setAttribute('type', 'hidden');
+            objSearchText.setAttribute('name', 'searchText');
+            objSearchText.setAttribute('value', "");
+
+            let objCurrentPage = document.createElement('input');
+            objCurrentPage.setAttribute('type', 'hidden');
+            objCurrentPage.setAttribute('name', 'currentPage');
+            objCurrentPage.setAttribute('value', page);
+
+            let objPageSize = document.createElement('input');
+            objPageSize.setAttribute('type', 'hidden');
+            objPageSize.setAttribute('name', 'pageSize');
+            objPageSize.setAttribute('value', 12);
+
+            let objOrderColumn = document.createElement('input');
+            objOrderColumn.setAttribute('type', 'hidden');
+            objOrderColumn.setAttribute('name', 'orderColumn');
+
+            let orderBy = document.createElement('input');
+            orderBy.setAttribute('type', 'hidden');
+            orderBy.setAttribute('name', 'orderBy');
+            if ($("#prd_sort").val() == "priced") {
+                orderBy.setAttribute('value', 'desc');
+                objOrderColumn.setAttribute('value', "price");
+            } else {
+                objOrderColumn.setAttribute('value', $("#prd_sort").val());
+            }
+
+            f.appendChild(objSearchText);
+            f.appendChild(objOrderColumn);
+            f.appendChild(objCurrentPage);
+            f.appendChild(objPageSize);
+            f.appendChild(orderBy)
+
+            f.setAttribute('method', 'post');
+            f.setAttribute('action', 'product');
+
+            document.body.appendChild(f);
+            f.submit();
         }
 
     </script>

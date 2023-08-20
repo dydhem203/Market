@@ -562,3 +562,15 @@ form a{
         display: none;
     }
 }
+
+/* product - by ssg.com */
+.com_tmp .tmpl_drop_select .sel_arrow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 29px;
+    height: 28px;
+    border-left: 1px solid #e1e1e1;
+    font-size: 0;
+    text-align: center;
+}

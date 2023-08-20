@@ -21,6 +21,7 @@
         <!-- Navbar -->
         <jsp:include page="navbar.jsp"></jsp:include>
         <div class="row">
+<%--            <img src="images/event1.jpeg"/>--%>
             <div class="col-2">
                 <h1>Give Your Workout <br> A New Style!</h1>
                 <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
@@ -30,6 +31,7 @@
             <div class="col-2">
                 <img src="images/image1.png">
             </div>
+
         </div>
     </div>
 </div>

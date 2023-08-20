@@ -12,15 +12,6 @@
         from productImage
         where productCode = #{productCode}
     </select>
-    <select id="getProducts" resultType="Product">
-        select P.productCode, P.productName, P.price, P.dcPrice, P.image, P.regCnt, P.remCnt, P.dcRate, P.brand, P.amt, P.scope
-        from (
-                 select @rownum:=@rownum+1 rnum, P.*
-                 from product P,
-                     (select @rownum := 0) R
-                 where 1 = 1) P
-        where rnum between #{startIdx} and #{startIdx} + #{productsPerPage} - 1
-    </select>
     <select id="getPopularProducts" resultType="Product">
         select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
         from product limit 8
@@ -28,5 +19,25 @@
     <select id="getAllProductsCnt" resultType="_int">
         select count(productCode) as totalProducts
         from product
+    </select>
+    <select id="getProducts" resultType="Product">
+        select P.productCode, P.productName, P.price, P.dcPrice, P.image, P.regCnt, P.remCnt, P.dcRate, P.brand, P.amt, P.scope
+          from (
+                 select @rownum:=@rownum+1 rnum, P.*
+                   from
+                     (select *
+                        from product
+                        <choose>
+                            <when test="searchParam.orderBy!=''and searchParam.orderBy!=null">
+                                order by ${searchParam.orderColumn} desc
+                            </when>
+                            <otherwise>
+                                order by ${searchParam.orderColumn}
+                            </otherwise>
+                        </choose>
+                       ) P,
+                     (select @rownum := 0) R
+                  where 1 = 1) P
+         where rnum between #{startIdx} and #{startIdx} + #{searchParam.pageSize} - 1
     </select>
 </mapper>

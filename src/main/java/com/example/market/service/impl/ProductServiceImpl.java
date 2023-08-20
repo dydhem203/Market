@@ -1,6 +1,7 @@
 package com.example.market.service.impl;
 
 import com.example.market.dto.Product;
+import com.example.market.dto.SearchParam;
 import com.example.market.mapper.ProductMapper;
 import com.example.market.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProducts(int startIdx, int productsPerPage) {
-
-        return productMapper.getProducts(startIdx, productsPerPage);
+    public List<Product> getProducts(int startIdx, SearchParam searchParam) {
+        return productMapper.getProducts(startIdx, searchParam);        // 추천순
     }
 
 
