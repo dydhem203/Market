@@ -10,6 +10,8 @@
 <%--                <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>--%>
                 <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>
                 <li><a href="/user/loginPage">계정</a></li>
+<%--                <li><a sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a></li>--%>
+<%--                <li><a sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a></li>--%>
             </ul>
         </nav>
         <a href="/cart/main"><img src="/images/cart.png" width="30px" height="30px"></a>

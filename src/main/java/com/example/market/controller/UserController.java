@@ -36,4 +36,9 @@ public class UserController {
             return "login";
         }
     }
+
+    @GetMapping("/logout")   // http://localhost:8080/user/logout
+    public String logout() {
+        return "login";
+    }
 }
