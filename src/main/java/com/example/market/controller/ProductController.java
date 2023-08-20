@@ -84,8 +84,10 @@ public class ProductController {
         model.addAttribute("products", productService.getProducts(startIdx, searchParam));
         model.addAttribute("prevTF", prevTF);
         model.addAttribute("startPage", startPage);
+        model.addAttribute("currentPage", searchParam.getCurrentPage());
         model.addAttribute("endPage", endPage);
         model.addAttribute("nextTF", nextTF);
+
 
         return "products";
     }

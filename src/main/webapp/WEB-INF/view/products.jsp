@@ -13,13 +13,6 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function(){
-           $("#prd_sort").change(function (){
-               loadProducts(1);
-           });
-        });
-    </script>
 </head>
 
 <body>
@@ -33,7 +26,7 @@
         <div class="row row-2">
             <h2>All Products</h2>
             <select class="prd_sort" id="prd_sort">
-                <option selected="selected" value="productCode">추천순</option>
+                <option value="productCode">추천순</option> <%-- selected="selected" --%>
                 <option value="price">낮은 가격순</option>
                 <option value="priced">높은 가격순</option>
                 <option value="dcrate">할인율순</option>
@@ -65,12 +58,15 @@
                 <span id="prevShow" >←</span>
             </c:if>
             <c:forEach var="p" begin="${startPage}" end="${endPage}">
-                <span onclick="loadProducts(${p})">${p}</span>
+                <c:choose>
+                    <c:when test="${currentPage == p}">
+                        <strong>${p}</strong>
+                    </c:when>
+                    <c:otherwise>
+                        <span onclick="loadProducts(${p})">${p}</span>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
-
-<%--            <span onclick="loadProducts(${2})">2</span>--%>
-<%--            <span>3</span>--%>
-<%--            <span>4</span>--%>
             <c:if test="${nextTF eq true}">
                 <span id="nextShow">→</span>
             </c:if>
@@ -82,6 +78,12 @@
     <jsp:include page="footer.jsp"></jsp:include>
 
     <script>
+        $(document).ready(function(){
+            $("#prd_sort").change(function (){
+                loadProducts(1);
+            });
+        });
+
         const loadProducts = (page) => {
 
             let f = document.createElement('form');
