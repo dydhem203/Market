@@ -12,6 +12,14 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<script>
+    $(document).ready(function(){
+        var errorMessage = '${errorMessage}';
+        if(errorMessage != null && errorMessage != ''){
+            alert(errorMessage);
+        }
+    });
+</script>
 
 <body>
 <!-- Navbar -->

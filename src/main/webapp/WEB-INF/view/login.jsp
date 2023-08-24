@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
+<script>
+    $(document).ready(function(){
+        var errorMessage = '${errorMessage}';
+        if(errorMessage != null && errorMessage != ''){
+            alert(errorMessage);
+        }
+    });
+</script>
+
 <body>
 <!-- Navbar -->
 <jsp:include page="navbar.jsp"></jsp:include>
@@ -30,9 +39,9 @@
                             <span>Login</span>
                             <hr id="Indicator">
                         </div>
-                        <form id="login">
-                            <input type="text" placeholder="Username">
-                            <input type="password" placeholder="Password">
+                        <form id="login" action="/user/login" method="post">
+                            <input type="text" placeholder="Username" name="userId">
+                            <input type="password" placeholder="Password" name="pw">
                             <button type="submit" class="btn">Login</button>
                             <a href="/user/joinPage">Join</a>
                         </form>

@@ -11,8 +11,8 @@
             type : "POST",
             data : data,
             contentType : 'application/json',
-            success : function(){
-                alert("장바구니 등록이 완료되었습니다.");
+            success : function(data){
+                alert("장바구니 추가가 완료되었습니다.");
             },
             error : function(e){
                 console.log(e);

@@ -4,6 +4,7 @@ import com.example.market.dto.User;
 import com.example.market.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,24 +18,32 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/loginPage")   // http://localhost:8080/user/loginPage
+    @GetMapping("/loginPage")
     public String loginPage() {
         return "login";
     }
 
-    @GetMapping("/joinPage")    // http://localhost:8080/user/joinPage
+    @GetMapping("/joinPage")
     public String joinPage() {
         return "join";
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute User user) throws IOException {
-        int result = userService.join(user);
-        if(result<0){
-            return "join";
-        }else{
+    public String join(@ModelAttribute User user, Model model) {
+        try {
+            userService.join(user);
             return "login";
+        }catch (IllegalStateException e){
+            model.addAttribute("errorMessage", e.getMessage());
+            return "join";
         }
+    }
+
+
+    @GetMapping(value = "/error")
+    public String loginError(Model model) {
+        model.addAttribute("errorMessage", "아이디 또는 비밀번호를 확인해주세요.");
+        return "login";
     }
 
     @GetMapping("/logout")   // http://localhost:8080/user/logout

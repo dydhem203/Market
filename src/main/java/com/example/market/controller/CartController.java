@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.Map;
 
 @Controller
@@ -23,9 +24,9 @@ public class CartController {
      * @return
      */
     @GetMapping("/main")
-    public String viewCartPage(HttpServletRequest request, Model model){
-        String userId = "jyjang";
-        model.addAttribute("carts", cartService.getCartDatasByUserId(userId));
+    public String viewCartPage(Principal principal, Model model){
+        if(principal != null)
+            model.addAttribute("carts", cartService.getCartDatasByUserId(principal.getName()));
         return "cart";
     }
 
@@ -37,15 +38,19 @@ public class CartController {
      * @return
      */
     @PostMapping("/addCart")
-    public void addCart(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String, Object> params) {
-        cartService.addCart(request, params);
+    public String addCart(Principal principal, @RequestBody Map<String, Object> params) {
+        int result = 0;
+        if(principal != null)
+            result = cartService.addCart(principal.getName(), params);
+        return "redirect:/";
     }
 
     @PostMapping("/removeCart")
-    public String removeCart(HttpServletRequest request, HttpServletResponse response, @RequestBody Map<String, Object> params, Model model) {
-        cartService.removeCart(request, params);
-        String userId = "jyjang";
-        model.addAttribute("carts", cartService.getCartDatasByUserId(userId));
+    public String removeCart(Principal principal, @RequestParam Map<String, Object> params, Model model) {
+        if(principal != null){
+            cartService.removeCart(principal.getName(), params);
+            model.addAttribute("carts", cartService.getCartDatasByUserId(principal.getName()));
+        }
         return "cart";
     }
 }

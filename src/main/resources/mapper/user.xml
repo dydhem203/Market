@@ -6,4 +6,9 @@
         insert into user (userId, pw, name, email, gender, hp, addr1, addr2, birthday, userLevel)
         values(#{userId}, #{pw}, #{name}, #{email}, #{gender}, #{hp}, #{addr1}, #{addr2}, #{birthday}, '01')
     </insert>
+    <select id="findByUserid" resultType="com.example.market.dto.User" parameterType="String">
+        select userId, pw, name, email, gender, hp, userLevel as role
+        from user
+        where userId = #{userId}
+    </select>
 </mapper>
