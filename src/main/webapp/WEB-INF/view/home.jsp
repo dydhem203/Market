@@ -13,6 +13,26 @@
           rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+<script type="text/JavaScript" src="http://code.jquery.com/jquery-1.7.min.js"></script>
+<script >
+    $(function(){
+        if(typeof $("#isLogin").val() != "undefined" && JSON.parse(localStorage.getItem('cartItems')) != null){
+            var cartItems = JSON.stringify ({"cartItems" : JSON.parse(localStorage.getItem('cartItems'))});
+            $.ajax({
+                url : "/cart/addCart",
+                type : "POST",
+                data : cartItems,
+                contentType : 'application/json',
+                success : function(){
+                    localStorage.removeItem("cartItems");
+                },
+                error : function(e){
+                    console.log(e);
+                }
+            });
+        }
+    });
+</script>
 
 <body>
 

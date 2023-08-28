@@ -4,20 +4,43 @@
 <!DOCTYPE html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-    function addCart(productCode){
-        var data = JSON.stringify ({"cartItems" : [{"productCode" : productCode, "cnt" : $("#cnt").val()}]});
-        $.ajax({
-            url : "/cart/addCart",
-            type : "POST",
-            data : data,
-            contentType : 'application/json',
-            success : function(data){
-                alert("장바구니 추가가 완료되었습니다.");
-            },
-            error : function(e){
-                console.log(e);
+    function addCart(productCode) {
+        if(typeof $("#isLogin").val() == "undefined"){
+            var cartItem = {"productCode": productCode, "cnt": $("#cnt").val()};
+            let cartItems = JSON.parse(localStorage.getItem('cartItems'));
+            if (cartItems != null){
+                var exist = false;
+                for (let i = 0; i < cartItems.length; i++) {
+                    let temp = cartItems[i];
+                    if (temp["productCode"] == productCode){
+                        temp["cnt"] = Number(temp["cnt"]) + Number($("#cnt").val());
+                        exist = true;
+                        break;
+                    }
+                }
+                if(!exist) cartItems.push(cartItem);
             }
-        });
+            else{
+                cartItems = [];
+                cartItems.push(cartItem);
+            }
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            alert("장바구니 추가가 완료되었습니다.");
+        }else{
+            var cartItems = JSON.stringify ({"cartItems" : [{"productCode" : productCode, "cnt" : $("#cnt").val()}]});
+            $.ajax({
+                url : "/cart/addCart",
+                type : "POST",
+                data : cartItems,
+                contentType : 'application/json',
+                success : function(data){
+                    alert("장바구니 추가가 완료되었습니다.");
+                },
+                error : function(e){
+                    console.log(e);
+                }
+            });
+        }
     }
 </script>
 
