@@ -15,7 +15,7 @@
                 <sec:authorize access="isAuthenticated()"><input type="hidden" id="isLogin" name="isLogin" value="true"></sec:authorize>
             </ul>
         </nav>
-        <a href="/cart/main"><img src="/images/cart.png" width="30px" height="30px"></a>
+        <a onclick="goCart()"><img src="/images/cart.png" width="30px" height="30px"></a>
         <img src="/images/menu.png" class="menu-icon" onclick="menutoggle()">
     </div>
 </div>
@@ -39,4 +39,24 @@
         document.body.appendChild(f);
         f.submit();
     }
+
+    function goCart(){
+        let f = document.createElement('form');
+        var cartItems = JSON.stringify (JSON.parse(localStorage.getItem('cartItems')));
+        let obj;
+        obj = document.createElement('input');
+        obj.setAttribute('type', 'hidden');
+        obj.setAttribute('name', 'cartItems');
+        obj.setAttribute('value', cartItems);
+
+        f.appendChild(obj);
+        f.setAttribute("id", "cartForm");
+        f.setAttribute('method', 'post');
+        f.setAttribute('Content-Type', 'application/json');
+        f.setAttribute('action', '/cart/main');
+        document.body.appendChild(f);
+        $("#cartForm").submit();
+        console.log(cartItems)
+    }
+
 </script>

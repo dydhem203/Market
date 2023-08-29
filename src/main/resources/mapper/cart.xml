@@ -8,6 +8,16 @@
         where c.userId = #{userId}
     </select>
 
+    <select id="getCartDatasByProductCode" resultType="Cart">
+        select c.cnt, c.productCode, p.productName, p.dcPrice, p.image
+        from product p
+            inner join
+        <foreach collection="cartDatas" item="cart" separator=" union all " open="(" close=")">
+            select #{cart.productCode} productCode, #{cart.cnt} cnt
+        </foreach>
+            c on p.productCode = c.productCode
+    </select>
+
     <insert id="addUserCartData">
         INSERT INTO cart (userId, productCode, cartdate, cnt)
         VALUES

@@ -4,15 +4,15 @@ import com.example.market.constatnts.CommonConstatns;
 import com.example.market.dto.Cart;
 import com.example.market.mapper.CartMapper;
 import com.example.market.service.CartService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -22,6 +22,23 @@ public class CartServiceImpl implements CartService {
     @Override
     public List<Cart> getCartDatasByUserId(String userId){
         return cartMapper.getCartDatasByUserId(userId);
+    }
+
+    @Override
+    public List<Cart> getCartDatasByProductCode(Map<String, Object> params){
+        try {
+            JsonArray array = (JsonArray) new JsonParser().parse(String.valueOf(params.get("cartItems")));
+            List<Map<String, Object>> cartDatas = new ArrayList<>();
+
+            Gson gson = new Gson();
+            for (Object jsonObject : array) {
+                cartDatas.add(gson.fromJson(jsonObject.toString(), Map.class));
+            }
+            return cartMapper.getCartDatasByProductCode(cartDatas);
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

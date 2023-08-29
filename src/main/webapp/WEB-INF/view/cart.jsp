@@ -5,35 +5,39 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     function removeCart(productCode){
-        // var data = JSON.stringify ({"productCode" : productCode});
-        // $.ajax({
-        //     url : "/cart/removeCart",
-        //     type : "POST",
-        //     data : data,
-        //     contentType : 'application/json',
-        //     success : function(){
-        //     },
-        //     error : function(e){
-        //         console.log(e);
-        //     }
-        // });
+        if(typeof $("#isLogin").val() == "undefined"){
+            let cartItems = JSON.parse(localStorage.getItem('cartItems'))
+            if(cartItems != null){
+                let tempCartitems = [];
+                for (let i = 0; i < cartItems.length; i++) {
+                    let temp = cartItems[i];
+                    if (temp["productCode"] != productCode){
+                        tempCartitems.push(cartItems[i]);
+                    }
+                }
+                localStorage.removeItem('cartItems');
+                if(tempCartitems.length > 0) localStorage.setItem('cartItems', JSON.stringify(tempCartitems));
+                goCart();
+            }
+        }else{
+            let f = document.createElement('form');
+            let obj;
+            obj = document.createElement('input');
+            obj.setAttribute('type', 'hidden');
+            obj.setAttribute('name', 'productCode');
+            obj.setAttribute('value', productCode);
 
-        let f = document.createElement('form');
-        let obj;
-        obj = document.createElement('input');
-        obj.setAttribute('type', 'hidden');
-        obj.setAttribute('name', 'productCode');
-        obj.setAttribute('value', productCode);
-
-        f.appendChild(obj);
-        f.setAttribute('method', 'post');
-        f.setAttribute('Content-Type', 'application/json');
-        f.setAttribute('action', '/cart/removeCart');
-        document.body.appendChild(f);
-        f.submit();
+            f.appendChild(obj);
+            f.setAttribute("id", "removeCartForm");
+            f.setAttribute('method', 'post');
+            f.setAttribute('Content-Type', 'application/json');
+            f.setAttribute('action', '/cart/removeCart');
+            document.body.appendChild(f);
+            $("#removeCartForm").submit();
+        }
     }
 </script>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">

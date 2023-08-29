@@ -1,14 +1,22 @@
 package com.example.market.controller;
 
 import com.example.market.service.CartService;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,9 +31,13 @@ public class CartController {
      * @param response
      * @return
      */
-    @GetMapping("/main")
-    public String viewCartPage(Principal principal, Model model){
-        if(principal != null)
+    @PostMapping("/main")
+    public String viewCartPage(Principal principal, Model model, @RequestParam Map<String, Object> params){
+        if(principal == null){
+            if(params.get("cartItems") != null && !"null".equals(params.get("cartItems")))
+                model.addAttribute("carts", cartService.getCartDatasByProductCode(params));
+        }
+        else
             model.addAttribute("carts", cartService.getCartDatasByUserId(principal.getName()));
         return "cart";
     }
