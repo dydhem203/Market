@@ -22,6 +22,8 @@ public class Product {
     private String allergy;
     private String expDate;
     private String details;
+    private String category1;
+    private String category2;
     private int scope;
     private List<ProductImage> productImageList;
 }

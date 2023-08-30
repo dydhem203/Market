@@ -42,6 +42,12 @@
             });
         }
     }
+    $(function(){
+        let dcPrice =${product.dcPrice};
+        $("#dcPrice").text(dcPrice.toLocaleString()+'원');
+        let price =${product.price};
+        $("#price").text(price.toLocaleString()+'원');
+    });
 </script>
 
 <head>
@@ -64,7 +70,7 @@
             <img src="${product.image}" width="100%" id="ProductImg">
         </div>
         <div class="col-2">
-            <p>Home / T-Shirt</p>
+            <p>${product.category1} / ${product.category2}</p>
             <h2>${product.productName}</h2>
             <div class="rating">
                 <i class="fa fa-star"></i>
@@ -75,8 +81,8 @@
             </div>
             <table>
                 <tr>
-                    <td><p>${product.price}</p></td>
-                    <td><h4>${product.dcPrice}</h4></td>
+                    <td><p><del id="price">${product.price}</del> ${product.dcRate}%</p></td>
+                    <td><h4 id="dcPrice"></h4></td>
                 </tr>
             </table>
             <table>
