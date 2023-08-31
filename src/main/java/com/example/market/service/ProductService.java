@@ -14,5 +14,5 @@ public interface ProductService {
 
     List<Product> getPopularProducts();
 
-    int getAllProductsCnt();
+    int getAllProductsCnt(String searchText);
 }

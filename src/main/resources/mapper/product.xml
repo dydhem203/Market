@@ -3,7 +3,25 @@
 
 <mapper namespace="com.example.market.mapper.ProductMapper">
     <select id="getProductDataByProductCode" resultType="Product">
-        select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope,category1,category2
+        select productCode,
+               productName,
+               price,
+               dcPrice,
+               image,
+               regCnt,
+               remCnt,
+               dcRate,
+               brand,
+               sellerId,
+               unit,
+               amt,
+               origin,
+               allergy,
+               expDate,
+               details,
+               scope,
+               category1,
+               category2
         from product
         where productCode = #{productCode}
     </select>
@@ -13,31 +31,51 @@
         where productCode = #{productCode}
     </select>
     <select id="getPopularProducts" resultType="Product">
-        select productCode,productName,price,dcPrice,image,regCnt,remCnt,dcRate,brand,sellerId,unit,amt,origin,allergy,expDate,details,scope
+        select productCode,
+               productName,
+               price,
+               dcPrice,
+               image,
+               regCnt,
+               remCnt,
+               dcRate,
+               brand,
+               sellerId,
+               unit,
+               amt,
+               origin,
+               allergy,
+               expDate,
+               details,
+               scope
         from product limit 8
     </select>
     <select id="getAllProductsCnt" resultType="_int">
         select count(productCode) as totalProducts
-        from product
+          from product
+         where 1 = 1
+           and productName like "%${searchText}%"
     </select>
     <select id="getProducts" resultType="Product">
         select P.productCode, P.productName, P.price, P.dcPrice, P.image, P.regCnt, P.remCnt, P.dcRate, P.brand, P.amt, P.scope
           from (
-                 select @rownum:=@rownum+1 rnum, P.*
-                   from
-                     (select *
-                        from product
-                        <choose>
-                            <when test="searchParam.orderBy!=''and searchParam.orderBy!=null">
-                                order by ${searchParam.orderColumn} desc
-                            </when>
-                            <otherwise>
-                                order by ${searchParam.orderColumn}
-                            </otherwise>
-                        </choose>
-                       ) P,
-                     (select @rownum := 0) R
-                  where 1 = 1) P
-         where rnum between #{startIdx} and #{startIdx} + #{searchParam.pageSize} - 1
+                select @rownum:=@rownum+1 rnum, P.*
+                  from
+                    (   select *
+                          from product
+                         where 1 = 1
+                           and productName like "%${searchParam.searchText}%"
+                            <choose>
+                                <when test="searchParam.orderBy == 'desc'">
+                                    order by ${searchParam.sort} desc
+                                </when>
+                                <otherwise>
+                                    order by ${searchParam.sort}
+                                </otherwise>
+                            </choose>
+                    ) P,
+                    (select @rownum := 0) R
+             where 1 = 1) P
+        where rnum between #{startIdx} and #{startIdx} + #{searchParam.pageSize} - 1
     </select>
 </mapper>

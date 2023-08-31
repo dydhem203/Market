@@ -290,8 +290,56 @@ ul{
 /* All Products */
 .row-2{
     justify-content: space-between;
-    margin: 100px auto 50px;
+    margin: 100px auto 20px;
 }
+
+/* 검색 칸 */
+@import "//netdna.bootstrapcdn.com/font-awesome/3.0/css/font-awesome.css";
+
+.search {
+    position: relative;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto;
+}
+
+.searchText {
+    height: 30px;
+    width: 100%;
+    padding: 5px;
+    font-size: 80%;
+    margin: 5px 0;
+    color: #222222;
+}
+
+.searchText::-webkit-input-placeholder {
+    font-family: FontAwesome;
+    font-weight: normal;
+    overflow: visible;
+    vertical-align: top;
+    display: inline-block !important;
+    padding-left: 5px;
+    padding-top: 2px;
+    color: #111111;
+}
+
+.purchase_btn {
+    display: inline-block;
+    background: #ff523b;
+    color: white;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: background 0.5s;
+}
+
+
+.purchase_btn:hover{
+    background: #563434;
+}
+
+
+
 select{
     border: 1px solid #ff523b;
     padding: 5px;

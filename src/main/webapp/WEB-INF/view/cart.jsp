@@ -87,6 +87,12 @@
                     <td>Total</td>
                     <td><c:out value="${total}원"></c:out></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit" class="btn">Register</button>
+                    </td>
+                </tr>
             </table>
         </div>
     </div>

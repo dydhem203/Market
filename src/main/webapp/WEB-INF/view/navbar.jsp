@@ -35,7 +35,7 @@
     function showProducts() {
         let f = document.createElement('form');
         f.setAttribute('method', 'post');
-        f.setAttribute('action', 'product');
+        f.setAttribute('action', '/product');
         document.body.appendChild(f);
         f.submit();
     }

@@ -22,6 +22,13 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Product> getProducts(int startIdx, SearchParam searchParam) {
+
+        if (searchParam.getSort() == null) {
+            searchParam.setSort("productCode");
+        } else if (searchParam.getSort().equals("priced")) {
+            searchParam.setSort("price");
+            searchParam.setOrderBy("desc");
+        }
         return productMapper.getProducts(startIdx, searchParam);        // 추천순
     }
 
@@ -32,7 +39,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public int getAllProductsCnt() {
-        return productMapper.getAllProductsCnt();
+    public int getAllProductsCnt(String searchText) {
+        if (searchText == null) {
+            searchText = "";
+        }
+        System.out.println("getAllProductsCnt - Service()");
+        System.out.println(searchText);
+        return productMapper.getAllProductsCnt(searchText);
     }
 }

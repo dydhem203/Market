@@ -15,5 +15,5 @@ public interface ProductMapper {
 
     List<Product> getPopularProducts();
 
-    int getAllProductsCnt();
+    int getAllProductsCnt(String searchText);
 }
