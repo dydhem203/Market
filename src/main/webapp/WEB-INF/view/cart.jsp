@@ -36,6 +36,12 @@
             $("#removeCartForm").submit();
         }
     }
+
+    $(document).ready(function () {
+        $("input[name=_selected_all_]").on('change', function(){  $("input[name=_select_]").prop('checked', this.checked);
+        });
+    });
+
 </script>
 <html>
 
@@ -58,12 +64,16 @@
     <div class="small-container cart-page">
         <table>
             <tr>
+                <th style="text-align: center"><input type="checkbox" name="_selected_all_"/></th>
                 <th>상품</th>
                 <th>수량</th>
                 <th>가격</th>
             </tr>
             <c:forEach items="${carts}" var="cart">
                 <tr>
+                    <td style="text-align: center">
+                        <input type="checkbox" class="chkbox" name="_select_"/>
+                    </td>
                     <td>
                         <div class="cart-info">
                             <img src="${cart.image}" style=" cursor: pointer;" onclick="location.href='/product/detail/${cart.productCode}';">
@@ -90,7 +100,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <button type="submit" class="btn">Register</button>
+                        <a href="javascript:buyItems();" class="buy_btn">Buy</a>
                     </td>
                 </tr>
             </table>

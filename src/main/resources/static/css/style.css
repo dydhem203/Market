@@ -323,21 +323,20 @@ ul{
     color: #111111;
 }
 
-.purchase_btn {
+.buy_btn {
     display: inline-block;
     background: #ff523b;
     color: white;
+    font-size: 100%;
     padding: 8px 30px;
-    margin: 30px 0;
     border-radius: 30px;
     transition: background 0.5s;
 }
 
 
-.purchase_btn:hover{
+.buy_btn:hover{
     background: #563434;
 }
-
 
 
 select{
@@ -453,6 +452,12 @@ td input{
     height: 30px;
     padding: 5px;
 }
+
+td .chkbox {
+    width: 13px;
+    height: 13px;
+}
+
 td a{
     color: #ff523b;
     font-size: 12px;
