@@ -62,6 +62,8 @@
 
     <!-- Cart items details -->
     <div class="small-container cart-page">
+        <h2>장바구니</h2>
+        <br>
         <table>
             <tr>
                 <th style="text-align: center"><input type="checkbox" name="_selected_all_"/></th>

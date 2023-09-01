@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.io.IOException;
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -49,5 +49,12 @@ public class UserController {
     @GetMapping("/logout")   // http://localhost:8080/user/logout
     public String logout() {
         return "login";
+    }
+
+    @GetMapping("/purchasePage")
+    public String getPurchaseData(Principal principal, Model model){
+        if(principal != null)
+            model.addAttribute("purchases", userService.getPurchaseData(principal.getName()));
+        return "purchase";
     }
 }

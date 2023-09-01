@@ -11,4 +11,9 @@
         from user
         where userId = #{userId}
     </select>
+    <select id="getParchaseDataByUserId" resultType="com.example.market.dto.Purchase" parameterType="String">
+        select p1.userId, p1.productCode, p2.productName, p2.price, p2.dcPrice, p2.image, p1.cnt, p1.productCode, p1.state, p1.purchaseDate
+        from purchase p1 inner join product p2 on p1.productCode = p2.productCode
+        where p1.userId = #{userId}
+    </select>
 </mapper>

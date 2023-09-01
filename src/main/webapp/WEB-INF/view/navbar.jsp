@@ -11,6 +11,7 @@
                 <li><a href="/">Market</a></li>
                 <li><a onclick="showProducts()" style="cursor: pointer" >상품</a></li>
                 <sec:authorize access="isAnonymous()"><li><a href="/user/loginPage">로그인</a></li></sec:authorize>
+                <sec:authorize access="isAuthenticated()"><li><a href="/user/purchasePage">구매내역</a></li></sec:authorize>
                 <sec:authorize access="isAuthenticated()"><li><a href="/user/logout">로그아웃</a></li></sec:authorize>
                 <sec:authorize access="isAuthenticated()"><input type="hidden" id="isLogin" name="isLogin" value="true"></sec:authorize>
             </ul>
