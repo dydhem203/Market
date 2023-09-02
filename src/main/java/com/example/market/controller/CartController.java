@@ -33,7 +33,6 @@ public class CartController {
      */
     @PostMapping("/main")
     public String viewCartPage(Principal principal, Model model, @RequestParam Map<String, Object> params){
-        System.out.println(params);
         if(principal == null){
             if(params.get("cartItems") != null && !"null".equals(params.get("cartItems")))
                 model.addAttribute("carts", cartService.getCartDatasByProductCode(params));

@@ -39,10 +39,7 @@ public class ProductController {
     @PostMapping("/product")
     public String getProducts(Model model, @ModelAttribute SearchParam searchParam) {
 
-        System.out.println(searchParam);
-
-        int totalProducts = productService.getAllProductsCnt(searchParam.getSearchText());    // 총 상품 개수
-        System.out.println(totalProducts);
+        int totalProducts = productService.getAllProductsCnt(searchParam.getSearchText());    // 총 상품 개수ㄴ
         int totalPages = ((totalProducts-1) / searchParam.getPageSize()) + 1;             // 총 페이지 개수
         int displayPageNum = 10;         // 한 번에 표시할 페이지의 개수
         int startPage = ((searchParam.getCurrentPage()-1) / displayPageNum) * displayPageNum + 1;              // 시작 페이지 번호

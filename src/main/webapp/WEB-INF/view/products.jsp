@@ -94,13 +94,6 @@
         $("#prd_sort").change(function () {
             loadProducts(1);
         });
-        <%--console.log("${searchParam.sort}")--%>
-
-        <%--if (${searchParam.sort}) {--%>
-        <%--    $("#prd_sort").val("productCode").prop("selected", true);--%>
-        <%--} else {--%>
-        <%--    $("#prd_sort").val(${searchParam.sort}).prop("selected", true);--%>
-        <%--}--%>
     });
 
     const loadProducts = (page) => {
@@ -142,3 +135,10 @@
 </script>
 </body>
 </html>
+<%
+    response.setHeader("Cache-Control","no-store");
+    response.setHeader("Pragma","no-cache");
+    response.setDateHeader("Expires",0);
+    if (request.getProtocol().equals("HTTP/1.1"))
+        response.setHeader("Cache-Control", "no-cache");
+%>

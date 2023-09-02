@@ -37,10 +37,61 @@
         }
     }
 
-    $(document).ready(function () {
-        $("input[name=_selected_all_]").on('change', function(){  $("input[name=_select_]").prop('checked', this.checked);
-        });
+    $(function(){
+        // checkbox 전체 선택 / 해제
+        $("input[name=_select_all_]").on('change', function(){  $("input[name=_select_]").prop('checked', this.checked);});
+
+        $("td[id=other]").prop('visibility', 'hidden');
+        $("input[name=_select_]").prop('checked', true);
+        $("input[name=_select_all_]").prop('checked', true);
     });
+
+    function selectAllClick() {             // 전체 제어하는 체크박스 선택시
+        var checkbox = $("input:checkbox[name=_select_]");
+        totPrice = 0;
+
+        checkbox.each(function(i) {     // 전체 가격 저장
+            var tr = checkbox.parent().parent().eq(i);
+            var td = tr.children();
+
+            var price = td.eq(3).text();        // price
+            totPrice += Number(price);
+        });
+
+        const allchkbox = document.getElementById("selectAll");
+
+        if (allchkbox.checked) {        // 전체 선택시 price 값 변경
+            $("#totPrice").text(totPrice);
+        } else {
+            $("#totPrice").text(0);
+        }
+    }
+
+    function getCheckedItemPrice() {
+        // 체크된 체크박스 가져오기
+        var checkbox = $("input:checkbox[name=_select_]:checked");
+        var totChkCnt = $("input:checkbox[name=_select_]").length;
+
+        if (totChkCnt !== checkbox.length) {
+            $("input[name=_select_all_]").prop('checked', false);
+        } else {
+            $("input[name=_select_all_]").prop('checked', true);
+        }
+
+        var totPrice = 0;
+
+        checkbox.each(function(i) {
+           // checkbox.parent(): checkbox의 부모 td.
+           // checkbox.parent().parent() : td의 부모는 tr.
+            var tr = checkbox.parent().parent().eq(i);
+            var td = tr.children();
+
+            var price = td.eq(3).text();        // price
+            totPrice += Number(price);
+        });
+        console.log(totPrice)
+        $("#totPrice").text(totPrice);
+    }
 
 </script>
 <html>
@@ -64,7 +115,7 @@
     <div class="small-container cart-page">
         <table>
             <tr>
-                <th style="text-align: center"><input type="checkbox" name="_selected_all_"/></th>
+                <th style="text-align: center"><input type="checkbox" id="selectAll" name="_select_all_" onclick="selectAllClick()"/></th>
                 <th>상품</th>
                 <th>수량</th>
                 <th>가격</th>
@@ -72,7 +123,7 @@
             <c:forEach items="${carts}" var="cart">
                 <tr>
                     <td style="text-align: center">
-                        <input type="checkbox" class="chkbox" name="_select_"/>
+                        <input type="checkbox" class="chkbox" name="_select_" onclick="getCheckedItemPrice()"/>
                     </td>
                     <td>
                         <div class="cart-info">
@@ -95,7 +146,7 @@
             <table>
                 <tr>
                     <td>Total</td>
-                    <td><c:out value="${total}원"></c:out></td>
+                    <td><span id="totPrice"><c:out value="${total}"/></span>원</td>
                 </tr>
                 <tr>
                     <td></td>
@@ -111,5 +162,4 @@
     <jsp:include page="footer.jsp"></jsp:include>
 
 </body>
-
 </html>
