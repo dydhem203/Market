@@ -1,11 +1,14 @@
 package com.example.market.service.impl;
 
+import com.example.market.dto.Purchase;
 import com.example.market.dto.User;
 import com.example.market.mapper.UserMapper;
 import com.example.market.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -20,5 +23,11 @@ public class UserServiceImpl implements UserService {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         user.setPw(passwordEncoder.encode(user.getPw()));
         return userMapper.joinUser(user);
+    }
+
+    @Override
+    public List<Purchase> getPurchaseData(String userId){
+        List<Purchase> temp = userMapper.getParchaseDataByUserId(userId);
+        return temp;
     }
 }
