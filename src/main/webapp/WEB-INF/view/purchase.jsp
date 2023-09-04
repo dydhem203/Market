@@ -4,8 +4,9 @@
 <!DOCTYPE html>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
-    function addReview(){
-
+    function addReview(productCode){
+        var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+        window.open('/product/review/'+productCode, 'popup', option);
     }
 </script>
 <html>

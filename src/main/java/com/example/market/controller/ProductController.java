@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+import java.util.Map;
+
 @Controller
 public class ProductController {
 
@@ -58,5 +61,19 @@ public class ProductController {
         model.addAttribute("nextTF", nextTF);
 
         return "products";
+    }
+
+    @GetMapping("/product/review/{productCode}")
+    public String reviewPage(@PathVariable("productCode") String productCode, Principal principal, Model model){
+        model.addAttribute("product",productService.getProductDataByProductCode(productCode));
+        model.addAttribute("review",productService.getReviewDataByProductCode(productCode, principal.getName()));
+        return "review";
+    }
+
+    @PostMapping("/product/addReview")
+    public String addReview(Principal principal, @RequestParam Map<String, Object> param, Model model){
+        param.put("userId", principal.getName());
+        productService.addReview(param);
+        return "review";
     }
 }

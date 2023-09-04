@@ -1,10 +1,11 @@
 package com.example.market.service;
 
 import com.example.market.dto.Product;
+import com.example.market.dto.Review;
 import com.example.market.dto.SearchParam;
-import org.springframework.core.annotation.MergedAnnotations;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface ProductService {
@@ -15,4 +16,6 @@ public interface ProductService {
     List<Product> getPopularProducts();
 
     int getAllProductsCnt(String searchText);
+    int addReview(Map<String, Object> param);
+    Review getReviewDataByProductCode(String productCode, String userId);
 }
