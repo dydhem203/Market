@@ -5,12 +5,10 @@ import com.example.market.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/user")
@@ -56,5 +54,18 @@ public class UserController {
         if(principal != null)
             model.addAttribute("purchases", userService.getPurchaseData(principal.getName()));
         return "purchase";
+    }
+
+    @GetMapping("/review/{purchaseNo}")
+    public String reviewPage(@PathVariable("purchaseNo") String purchaseNo, Principal principal, Model model){
+        model.addAttribute("review",userService.getReviewDataByPurchaseNo(purchaseNo, principal.getName()));
+        return "review";
+    }
+
+    @PostMapping("/addReview")
+    public String addReview(Principal principal, @RequestParam Map<String, Object> param){
+        param.put("userId", principal.getName());
+        userService.addReview(param);
+        return "review";
     }
 }

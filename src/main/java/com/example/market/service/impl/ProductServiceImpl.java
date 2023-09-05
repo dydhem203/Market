@@ -1,7 +1,6 @@
 package com.example.market.service.impl;
 
 import com.example.market.dto.Product;
-import com.example.market.dto.Review;
 import com.example.market.dto.SearchParam;
 import com.example.market.mapper.ProductMapper;
 import com.example.market.service.ProductService;
@@ -48,16 +47,5 @@ public class ProductServiceImpl implements ProductService {
         System.out.println("getAllProductsCnt - Service()");
         System.out.println(searchText);
         return productMapper.getAllProductsCnt(searchText);
-    }
-
-    @Override
-    public int addReview(Map<String, Object> param){
-        return productMapper.addReview(param);
-    }
-
-    @Override
-    public Review getReviewDataByProductCode(String productCode, String userId){
-        Map<String, Object> param = Map.of("productCode", productCode, "userId", userId);
-        return productMapper.getReviewDataByProductCode(param);
     }
 }

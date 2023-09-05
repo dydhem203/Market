@@ -6,7 +6,7 @@
 <script>
     function addReview(productCode){
         var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-        window.open('/product/review/'+productCode, 'popup', option);
+        window.open('/user/review/'+productCode, 'popup', option);
     }
 </script>
 <html>
@@ -46,7 +46,7 @@
                                 <p style=" cursor: pointer;" onclick="location.href='/product/detail/${purchase.productCode}';">${purchase.productName}</p>
                                 <small>Price: ${purchase.dcPrice}</small>
                                 <br>
-                                <a href="javascript:addReview(${purchase.productCode});">review</a>
+                                <a href="javascript:addReview(${purchase.no});">review</a>
                             </div>
                         </div>
                     </td>

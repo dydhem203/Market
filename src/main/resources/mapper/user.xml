@@ -12,8 +12,32 @@
         where userId = #{userId}
     </select>
     <select id="getParchaseDataByUserId" resultType="com.example.market.dto.Purchase" parameterType="String">
-        select p1.userId, p1.productCode, p2.productName, p2.price, p2.dcPrice, p2.image, p1.cnt, p1.productCode, p1.state, p1.purchaseDate
+        select p1. no, p1.userId, p1.productCode, p2.productName, p2.price, p2.dcPrice, p2.image, p1.cnt, p1.productCode, p1.state, p1.purchaseDate
         from purchase p1 inner join product p2 on p1.productCode = p2.productCode
         where p1.userId = #{userId}
     </select>
+
+    <select id="getReviewDataByPurchaseNo" resultType="com.example.market.dto.Review">
+        select r.no, r.userId, p2.no as purchaseNo, p.productCode, p.productName, p.price, p.dcPrice, p.image, r.contents, r.point, r.regDate, r.updDate
+        from product p
+                 inner join purchase p2 on p.productCode = p2.productCode
+                 left outer join review r on r.productCode = p.productCode and r.purchaseNo = p2.no
+        where p2.no = #{purchaseNo}
+          and p2.userId = #{userId}
+    </select>
+
+    <insert id="addReview">
+        insert into review(userId, purchaseNo, productCode, regDate, contents, point)
+        values(#{userId}, #{purchaseNo}, #{productCode}, now(), #{contents}, #{point})
+    </insert>
+    <update id="updateReview">
+        update review
+        set contents = #{contents}, point = #{point}, updDate = now()
+        where no = #{no}
+    </update>
+    <update id="updateReviewToProduct">
+        UPDATE product as t1, (select count(*) as cnt, avg(point) as point from review where productCode = #{productCode}) as t2
+        SET t1.scope = t2.point, t1.reviewCnt = t2.cnt
+        WHERE t1.productCode = #{productCode}
+    </update>
 </mapper>

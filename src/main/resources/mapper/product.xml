@@ -78,20 +78,4 @@
              where 1 = 1) P
         where rnum between #{startIdx} and #{startIdx} + #{searchParam.pageSize} - 1
     </select>
-
-    <select id="getReviewDataByProductCode" resultType="com.example.market.dto.Review">
-        select no, userId, productCode, regDate, contents, point
-        from review
-        where userId = #{userId}
-          and productCode = #{productCode}
-    </select>
-
-    <insert id="addReview">
-        insert into review(userId, productCode, regDate, contents, point)
-        values(#{userId}, #{productCode}, now(), #{contents}, #{point})
-        ON DUPLICATE KEY UPDATE
-            updDate=now(),
-            contents=#{contents},
-            point=#{point}
-    </insert>
 </mapper>

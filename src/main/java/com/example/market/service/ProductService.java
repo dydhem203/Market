@@ -16,6 +16,4 @@ public interface ProductService {
     List<Product> getPopularProducts();
 
     int getAllProductsCnt(String searchText);
-    int addReview(Map<String, Object> param);
-    Review getReviewDataByProductCode(String productCode, String userId);
 }

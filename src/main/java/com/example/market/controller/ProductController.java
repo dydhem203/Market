@@ -62,18 +62,4 @@ public class ProductController {
 
         return "products";
     }
-
-    @GetMapping("/product/review/{productCode}")
-    public String reviewPage(@PathVariable("productCode") String productCode, Principal principal, Model model){
-        model.addAttribute("product",productService.getProductDataByProductCode(productCode));
-        model.addAttribute("review",productService.getReviewDataByProductCode(productCode, principal.getName()));
-        return "review";
-    }
-
-    @PostMapping("/product/addReview")
-    public String addReview(Principal principal, @RequestParam Map<String, Object> param, Model model){
-        param.put("userId", principal.getName());
-        productService.addReview(param);
-        return "review";
-    }
 }

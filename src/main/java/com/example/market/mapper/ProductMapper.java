@@ -18,6 +18,4 @@ public interface ProductMapper {
     List<Product> getPopularProducts();
 
     int getAllProductsCnt(String searchText);
-    int addReview(Map<String, Object> param);
-    Review getReviewDataByProductCode(Map<String, Object> param);
 }

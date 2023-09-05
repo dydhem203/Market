@@ -9,10 +9,12 @@
             var form1 = $("#review").serialize();
             $.ajax({
                 type: "post",
-                url : "/product/addReview",
+                url : "/user/addReview",
                 data: form1,
                 success: function (data) {
-                    alert("리뷰 등록에 성공했습니다.");
+                    var reviewNo = '${review.no}';
+                    if(reviewNo == '') alert("리뷰를 등록했습니다.");
+                    else alert("리뷰를 수정했습니다.")
                     window.close();
                 },
                 error : function(e){
@@ -46,13 +48,13 @@
     <table>
         <tr>
             <td style="width: 20%">
-                <img src="${product.image}" style=" cursor: pointer;">
+                <img src="${review.image}" style=" cursor: pointer;">
             </td>
             <td style="width: 60%">
-                ${product.productName}
+                ${review.productName}
             </td>
             <td style="width: 10%">
-                ${product.dcPrice}원
+                ${review.dcPrice}원
             </td>
 
         </tr>
@@ -78,7 +80,9 @@
                 </td>
             </tr>
         </table>
-        <input type="hidden" name="productCode" value="${product.productCode}">
+        <input type="hidden" name="productCode" value="${review.productCode}">
+        <input type="hidden" name="purchaseNo" value="${review.purchaseNo}">
+        <input type="hidden" name="no" value="${review.no}">
         <button class="btn" id="submit" type="button">리뷰 등록</button>
     </form>
 
