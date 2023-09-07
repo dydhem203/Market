@@ -1,5 +1,6 @@
 package com.example.market.controller;
 
+import com.example.market.dto.Purchase;
 import com.example.market.service.CartService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
@@ -27,17 +28,17 @@ public class CartController {
 
     /**
      * http://localhost:8080/cart/main
+     *
      * @param request
      * @param response
      * @return
      */
     @PostMapping("/main")
-    public String viewCartPage(Principal principal, Model model, @RequestParam Map<String, Object> params){
-        if(principal == null){
-            if(params.get("cartItems") != null && !"null".equals(params.get("cartItems")))
+    public String viewCartPage(Principal principal, Model model, @RequestParam Map<String, Object> params) {
+        if (principal == null) {
+            if (params.get("cartItems") != null && !"null".equals(params.get("cartItems")))
                 model.addAttribute("carts", cartService.getCartDatasByProductCode(params));
-        }
-        else
+        } else
             model.addAttribute("carts", cartService.getCartDatasByUserId(principal.getName()));
         return "cart";
     }
@@ -45,6 +46,7 @@ public class CartController {
     /**
      * 로그인 할 때, 로그인 한 상태에서 장바구니 클릭했을 때 호출
      * http://localhost:8080/cart/addCart
+     *
      * @param request
      * @param response
      * @return
@@ -52,17 +54,28 @@ public class CartController {
     @PostMapping("/addCart")
     public String addCart(Principal principal, @RequestBody Map<String, Object> params) {
         int result = 0;
-        if(principal != null)
+        if (principal != null)
             result = cartService.addCart(principal.getName(), params);
         return "redirect:/";
     }
 
     @PostMapping("/removeCart")
     public String removeCart(Principal principal, @RequestParam Map<String, Object> params, Model model) {
-        if(principal != null){
+        if (principal != null) {
             cartService.removeCart(principal.getName(), params);
             model.addAttribute("carts", cartService.getCartDatasByUserId(principal.getName()));
         }
+        return "cart";
+    }
+
+    @PostMapping("/purchase")
+    public String purchaseItems(Principal principal, @RequestBody List<Purchase> purchases, Model model) {
+        if (principal != null) {
+            cartService.addPurchaseItems(principal.getName(), purchases);
+//            cartService.removeCartItems(principal.getName(), purchases);
+//            model.addAttribute("items", cartService.getPurchaseItemsByUserId(principal.getName()));
+        }
+        System.out.println(purchases);
         return "cart";
     }
 }

@@ -2,6 +2,7 @@ package com.example.market.service.impl;
 
 import com.example.market.constatnts.CommonConstatns;
 import com.example.market.dto.Cart;
+import com.example.market.dto.Purchase;
 import com.example.market.mapper.CartMapper;
 import com.example.market.service.CartService;
 import com.google.gson.Gson;
@@ -53,5 +54,21 @@ public class CartServiceImpl implements CartService {
         String productCode = String.valueOf(paramgeters.get(CommonConstatns.productCode));
         // 장바구니 추가
         return cartMapper.removeUserCartData(productCode, userId);
+    }
+
+    @Override
+    public int addPurchaseItems(String userId, List<Purchase> purchases) {
+        // 구매 테이블에 해당 내용 적재
+        return cartMapper.addPurchaseItems(userId, purchases);
+    }
+
+    @Override
+    public List<Purchase> getPurchaseItemsByUserId(String userId) {
+        return null;
+    }
+
+    @Override
+    public int removeCartItems(String userId, List<Purchase> purchases) {
+        return cartMapper.updateCartData(userId, purchases);
     }
 }

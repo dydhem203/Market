@@ -44,8 +44,6 @@ public class ProductServiceImpl implements ProductService {
         if (searchText == null) {
             searchText = "";
         }
-        System.out.println("getAllProductsCnt - Service()");
-        System.out.println(searchText);
         return productMapper.getAllProductsCnt(searchText);
     }
 }

@@ -32,4 +32,14 @@
     <delete id="removeUserCartData">
         DELETE FROM cart WHERE userId = #{userId} AND productCode = #{productCode}
     </delete>
+
+    <insert id="addPurchaseItems">
+        INSERT INTO purchase (userId, productCode, cnt, purchaseDate, state)
+        VALUES
+        <foreach collection="purchases" item="product" index="index" separator=",">
+            (#{userId}, #{product.productCode}, #{product.cnt}, now(), "01")
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+            purchaseDate=now()
+    </insert>
 </mapper>

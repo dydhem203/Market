@@ -1,6 +1,7 @@
 package com.example.market.mapper;
 
 import com.example.market.dto.Cart;
+import com.example.market.dto.Purchase;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public interface CartMapper {
     List<Cart> getCartDatasByProductCode(List<Map<String, Object>> cartDatas);
     int addUserCartData(List<Map<String, Object>> carts, String userId);
     int removeUserCartData(String productCode, String userId);
+    int updateCartData(String name, List<Purchase> purchases);
+
+    int addPurchaseItems(String userId, List<Purchase> purchases);
 }

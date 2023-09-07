@@ -93,6 +93,41 @@
         $("#totPrice").text(totPrice);
     }
 
+    function purchaseItems() {
+        if(typeof $("#isLogin").val() == "undefined"){  // 로그인 x
+            var result = confirm("로그인이 필요합니다.\n로그인하시겠습니까?");
+            if (result) {
+                // 로그인 -> 다시 장바구니 페이지로.
+        }
+        } else{     // 로그인
+            // 체크된 항목 가져오기
+            var checkbox = $("input:checkbox[name=_select_]:checked");
+            var cartItems = [];
+
+            checkbox.each(function(i) {
+                var tr = checkbox.parent().parent().eq(i);
+                var td = tr.children();
+                var cartItem = {"productCode": td.eq(2).children().eq(1).val(), "cnt": td.eq(2).children().eq(0).val()};
+
+                cartItems.push(cartItem);
+            });
+
+            console.log(cartItems);
+            $.ajax({
+                url : "/cart/purchase",
+                type : "POST",
+                data : JSON.stringify(cartItems),
+                contentType : 'application/json; charset=UTF-8',
+                success : function(data){
+                    console.log("구매페이지로 이동");
+                },
+                error : function(e){
+                    console.log(e);
+                }
+            });
+        }
+    }
+
 </script>
 <html>
 
@@ -138,7 +173,10 @@
                             </div>
                         </div>
                     </td>
-                    <td><input type="number" value="${cart.cnt}"></td>
+                    <td>
+                        <input type="number" value="${cart.cnt}">
+                        <input type="hidden" value="${cart.productCode}">
+                    </td>
                     <td>${cart.dcPrice * cart.cnt}</td>
                     <c:set var="total" value="${total + cart.dcPrice * cart.cnt}" />
                 </tr>
@@ -153,7 +191,7 @@
                 <tr>
                     <td></td>
                     <td>
-                        <a href="javascript:buyItems();" class="buy_btn">Buy</a>
+                        <a href="javascript:purchaseItems();" class="buy_btn">Buy</a>
                     </td>
                 </tr>
             </table>
