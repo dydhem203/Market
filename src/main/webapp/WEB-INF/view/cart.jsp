@@ -102,29 +102,33 @@
         } else{     // 로그인
             // 체크된 항목 가져오기
             var checkbox = $("input:checkbox[name=_select_]:checked");
-            var cartItems = [];
+            var buyItems = [];
 
             checkbox.each(function(i) {
                 var tr = checkbox.parent().parent().eq(i);
                 var td = tr.children();
-                var cartItem = {"productCode": td.eq(2).children().eq(1).val(), "cnt": td.eq(2).children().eq(0).val()};
+                var buyItem = {"productCode": td.eq(2).children().eq(1).val(), "cnt": td.eq(2).children().eq(0).val()};
 
-                cartItems.push(cartItem);
+                buyItems.push(buyItem);
             });
 
-            console.log(cartItems);
-            $.ajax({
-                url : "/cart/purchase",
-                type : "POST",
-                data : JSON.stringify(cartItems),
-                contentType : 'application/json; charset=UTF-8',
-                success : function(data){
-                    console.log("구매페이지로 이동");
-                },
-                error : function(e){
-                    console.log(e);
-                }
-            });
+            let f = document.createElement('form');
+            let obj;
+            obj = document.createElement('input');
+            obj.setAttribute('type', 'hidden');
+            obj.setAttribute('name', 'buyItems');
+            obj.setAttribute('value', JSON.stringify(buyItems));
+
+
+
+            f.appendChild(obj);
+            f.setAttribute("id", "cartItemsForm");
+            f.setAttribute('method', 'post');
+            f.setAttribute('Content-Type', 'application/json');
+            f.setAttribute('action', '/cart/purchase');
+            document.body.appendChild(f);
+            $("#cartItemsForm").submit();
+
         }
     }
 

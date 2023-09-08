@@ -42,6 +42,31 @@
             });
         }
     }
+
+    function purchase(productCode) {
+        if(typeof $("#isLogin").val() == "undefined"){
+            alert("로그인 해주세요");
+        }else{
+            var buyItems = JSON.stringify([{"productCode" : productCode, "cnt" : $("#cnt").val()}]);
+
+            let f = document.createElement('form');
+            let obj;
+            obj = document.createElement('input');
+            obj.setAttribute('type', 'hidden');
+            obj.setAttribute('name', 'buyItems');
+            obj.setAttribute('value', buyItems );
+
+            f.appendChild(obj);
+            f.setAttribute("id", "buyItemsForm");
+            f.setAttribute('method', 'post');
+            f.setAttribute('Content-Type', 'application/json');
+            f.setAttribute('action', '/cart/purchase');
+            document.body.appendChild(f);
+            $("#buyItemsForm").submit();
+        }
+
+    }
+
     $(function(){
         let dcPrice =${product.dcPrice};
         $("#dcPrice").text(dcPrice.toLocaleString()+'원');
@@ -151,6 +176,7 @@
             <div id="addToCart">
                 <input type="number" value="1" id="cnt">
                 <a href="javascript:addCart(${product.productCode});" class="btn">Add To Cart</a>
+                <a href="javascript:purchase(${product.productCode});" class="btn">Buy</a>
             </div>
 
             <h3>Product Details <i class="fa fa-indent"></i></h3>

@@ -19,8 +19,8 @@ public class Purchase {
     public String getStateName(){
         String statusName = "";
         if("01".equals(this.state)) return "구매완료";
-        else if("01".equals(this.state)) return "결제완료";
-        else if("01".equals(this.state)) return "배송완료";
+        else if("02".equals(this.state)) return "결제완료";
+        else if("03".equals(this.state)) return "배송완료";
         else return "";
     }
 }

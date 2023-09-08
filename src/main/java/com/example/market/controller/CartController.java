@@ -2,6 +2,8 @@ package com.example.market.controller;
 
 import com.example.market.dto.Purchase;
 import com.example.market.service.CartService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -69,13 +71,18 @@ public class CartController {
     }
 
     @PostMapping("/purchase")
-    public String purchaseItems(Principal principal, @RequestBody List<Purchase> purchases, Model model) {
+    public String purchaseItems(Principal principal, @RequestParam Map<String, Object> params, Model model) throws JsonProcessingException {
         if (principal != null) {
-            cartService.addPurchaseItems(principal.getName(), purchases);
-//            cartService.removeCartItems(principal.getName(), purchases);
-//            model.addAttribute("items", cartService.getPurchaseItemsByUserId(principal.getName()));
+            String json = params.get("buyItems").toString();
+            ObjectMapper mapper = new ObjectMapper();
+            List list = mapper.readValue(json, new TypeReference<List<Purchase>>(){});
+            // 구매 테이블에 추가
+            cartService.addPurchaseItems(principal.getName(), list);
+            // 장바구니 테이블에서 삭제
+            //cartService.removeCartItems(principal.getName(), purchases);
+            // 구매 테이블에 있는 데이터 보내기
+            model.addAttribute("purchases", cartService.getPurchaseItemsByUserId(principal.getName()));
         }
-        System.out.println(purchases);
-        return "cart";
+        return "purchase";
     }
 }

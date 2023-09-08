@@ -13,7 +13,9 @@ public interface CartMapper {
     List<Cart> getCartDatasByProductCode(List<Map<String, Object>> cartDatas);
     int addUserCartData(List<Map<String, Object>> carts, String userId);
     int removeUserCartData(String productCode, String userId);
-    int updateCartData(String name, List<Purchase> purchases);
+    int removeCartItems(String userId, List<Purchase> purchases);
 
     int addPurchaseItems(String userId, List<Purchase> purchases);
+
+    List<Purchase> getPurchaseItemsByUserId(String userId);
 }

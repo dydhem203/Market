@@ -64,11 +64,11 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public List<Purchase> getPurchaseItemsByUserId(String userId) {
-        return null;
+        return cartMapper.getPurchaseItemsByUserId(userId);
     }
 
     @Override
     public int removeCartItems(String userId, List<Purchase> purchases) {
-        return cartMapper.updateCartData(userId, purchases);
+        return cartMapper.removeCartItems(userId, purchases);
     }
 }

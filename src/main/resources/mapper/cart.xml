@@ -42,4 +42,19 @@
         ON DUPLICATE KEY UPDATE
             purchaseDate=now()
     </insert>
+
+    <delete id="removeCartItems">
+        DELETE FROM cart WHERE userId = #{userId} AND productCode IN (
+        <foreach collection="purchases" item="product" index="index" separator=",">
+            #{product.productCode}
+        </foreach>
+        )
+    </delete>
+
+    <select id="getPurchaseItemsByUserId" resultType="Purchase">
+        SELECT o.no, o.userId, o.productCode, p.productName, p.price, p.dcPrice, p.image, o.cnt, o.purchaseDate, o.state
+        FROM purchase as o
+            join product as p on o.productCode = p.productCode
+        WHERE o.userId = #{userId}
+    </select>
 </mapper>
