@@ -640,3 +640,14 @@ form a{
     font-size: 0;
     text-align: center;
 }
+
+.showstep{
+    max-height: 600px;
+    overflow: hidden;
+}
+.content{
+    background-color: #a00;
+}
+.hide{
+    display: none;
+}
