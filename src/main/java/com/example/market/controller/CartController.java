@@ -71,17 +71,20 @@ public class CartController {
     }
 
     @PostMapping("/purchase")
-    public String purchaseItems(Principal principal, @RequestParam Map<String, Object> params, Model model) throws JsonProcessingException {
-        if (principal != null) {
-            String json = params.get("buyItems").toString();
-            ObjectMapper mapper = new ObjectMapper();
-            List list = mapper.readValue(json, new TypeReference<List<Purchase>>(){});
-            // 구매 테이블에 추가
-            cartService.addPurchaseItems(principal.getName(), list);
-            // 장바구니 테이블에서 삭제
-            //cartService.removeCartItems(principal.getName(), purchases);
-            // 구매 테이블에 있는 데이터 보내기
-            model.addAttribute("purchases", cartService.getPurchaseItemsByUserId(principal.getName()));
+    public String purchaseItems(Principal principal, @RequestParam Map<String, Object> params, Model model) {
+        try {
+            if (principal != null) {
+                String json = params.get("buyItems").toString();
+                ObjectMapper mapper = new ObjectMapper();
+                List list = mapper.readValue(json, new TypeReference<List<Purchase>>(){});
+                // 구매 테이블에 추가
+                cartService.addPurchaseItems(principal.getName(), list);
+                // 장바구니 테이블에서 삭제
+                // 구매 테이블에 있는 데이터 보내기
+                model.addAttribute("purchases", cartService.getPurchaseItemsByUserId(principal.getName()));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return "purchase";
     }

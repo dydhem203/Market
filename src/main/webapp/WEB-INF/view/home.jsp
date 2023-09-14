@@ -78,7 +78,7 @@
 <br><br>
 
 <div class="small-container">
-    <h2 class="title">지금 인기있는 상품이에요.</h2>
+    <h2 class="title">Popular Products</h2>
     <ul class="row">
         <c:forEach var="item" items="${popularProducts}">
             <li class="col-4">
